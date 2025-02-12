@@ -1,11 +1,33 @@
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  createHttpLink,
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import App from "./App";
+
+// Create an HTTP link to the backend GraphQL endpoint
+const httpLink = createHttpLink({
+  uri: "http://localhost:3000/graphql",
+});
+
+// Add headers to the request
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      "content-type": "application/json", // Ensure the content-type is set
+      "x-apollo-operation-name": "graphql", // Add a non-empty value for this header
+    },
+  };
+});
 
 // Create Apollo Client
 const client = new ApolloClient({
-  uri: "http://localhost:3000/graphql", // Backend GraphQL endpoint
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

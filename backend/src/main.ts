@@ -3,9 +3,11 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  // Enable CORS globally
   app.enableCors({
-    origin: '*', // Set on prod to different value for security reasons
-    credentials: true,
+    origin: ['http://localhost:3000', 'http://localhost:3001'], // Allow frontend origins
+    credentials: true, // Allow cookies and auth headers
     allowedHeaders: [
       'Accept',
       'Authorization',

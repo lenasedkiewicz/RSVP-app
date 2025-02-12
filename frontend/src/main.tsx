@@ -12,6 +12,7 @@ import App from "./App";
 // Create an HTTP link to the backend GraphQL endpoint
 const httpLink = createHttpLink({
   uri: "http://localhost:3000/graphql",
+  credentials: "include", // Allows cookies/auth headers to be sent
 });
 
 // Add headers to the request
@@ -19,8 +20,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      "content-type": "application/json", // Ensure the content-type is set
-      "x-apollo-operation-name": "graphql", // Add a non-empty value for this header
+      "Content-Type": "application/json", // Ensure proper content type
     },
   };
 });

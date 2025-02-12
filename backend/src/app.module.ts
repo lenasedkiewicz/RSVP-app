@@ -7,10 +7,10 @@ import { WelcomeController } from './welcome/welcome.controller';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://mongo:27017/mydb'), // Use 'mongo' as the host (Docker service name)
+    MongooseModule.forRoot('mongodb://mongo:27017/mydb'), // Connect to MongoDB
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true,
+      autoSchemaFile: true, // Generates schema automatically
     }),
   ],
   providers: [ExampleResolver],

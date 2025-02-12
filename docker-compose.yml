@@ -23,11 +23,9 @@ services:
     build: ./frontend
     container_name: frontend
     ports:
-      - "3001:3000" # Map port 3000 (Vite) to 3001 on the host
+      - "3001:80" # Nginx serves the production build on port 80
     depends_on:
       - backend
-    environment:
-      - NODE_ENV=development
 
 volumes:
   mongo-data:

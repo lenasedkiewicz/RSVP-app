@@ -12,6 +12,10 @@ import App from "./App";
 // Create an HTTP link to the backend GraphQL endpoint
 const httpLink = createHttpLink({
   uri: "http://localhost:3000/graphql",
+  headers: {
+    "x-apollo-operation-name": "GetUserDetails", // Make sure it's non-empty
+    "apollo-require-preflight": "true", // Optional, depending on your needs
+  },
   credentials: "include", // Allows cookies/auth headers to be sent
 });
 

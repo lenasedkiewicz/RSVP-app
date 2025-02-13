@@ -1,19 +1,22 @@
 import { Module } from '@nestjs/common';
+import { AppResolver } from './app.resolver';
+import { AppService } from './app.service';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
-import { MongooseModule } from '@nestjs/mongoose';
-import { ExampleResolver } from './example/example.resolver';
-import { WelcomeController } from './welcome/welcome.controller';
+import { join } from 'path';
+import { ApolloServerPluginLandingPageLocalDefault } from 'apollo-server-core';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://mongo:27017/mydb'), // Connect to MongoDB
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      autoSchemaFile: true, // Generates schema automatically
+      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      playground: true,
+      plugins: [],
+      csrfPrevention: false,
     }),
   ],
-  providers: [ExampleResolver],
-  controllers: [WelcomeController],
+  controllers: [],
+  providers: [AppService, AppResolver],
 })
 export class AppModule { }

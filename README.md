@@ -10,6 +10,7 @@ Important. You need to have configured Docker Desktop.
 
 ## Project structure
 
+```
 my-app/
 ├── backend/ # Nest.js backend
 │ ├── src/ # Source code
@@ -30,6 +31,7 @@ my-app/
 │
 ├── docker-compose.yml # Docker Compose configuration
 └── README.md # Project documentation
+```
 
 ## Technologies used
 
@@ -123,3 +125,7 @@ Docker and Docker Compose are used for containerization and orchestration.
 How It Works:
 The frontend sends GraphQL queries to the backend, which processes them and returns the results.
 MongoDB is used to store data, and Docker Compose ensures all services work together seamlessly.
+
+```
+
+```

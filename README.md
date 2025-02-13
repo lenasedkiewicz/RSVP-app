@@ -10,6 +10,7 @@ Important. You need to have configured Docker Desktop.
 
 ## Project structure
 
+```
 my-app/
 ├── backend/ # Nest.js backend
 │ ├── src/ # Source code
@@ -30,6 +31,7 @@ my-app/
 │
 ├── docker-compose.yml # Docker Compose configuration
 └── README.md # Project documentation
+```
 
 ## Technologies used
 

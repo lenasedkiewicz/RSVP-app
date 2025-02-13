@@ -9,9 +9,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 
+const backendUrl = process.env.BACKEND_URL ?? "http://backend:3000";
+
 // Create an HTTP link to the backend GraphQL endpoint
 const httpLink = createHttpLink({
-  uri: "http://localhost:3000/graphql",
+  uri: `${backendUrl}/graphql`,
   headers: {
     "x-apollo-operation-name": "GetUserDetails", // Make sure it's non-empty
     "apollo-require-preflight": "true", // Optional, depending on your needs

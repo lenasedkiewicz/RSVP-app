@@ -1,10 +1,5 @@
-import { gql, useQuery } from "@apollo/client";
-
-const HELLO_QUERY = gql`
-  query {
-    hello
-  }
-`;
+import { useQuery } from "@apollo/client";
+import { HELLO_QUERY } from "./queries";
 
 function App() {
   const { loading, error, data } = useQuery(HELLO_QUERY);
@@ -14,8 +9,8 @@ function App() {
 
   return (
     <div>
-      <h1>Frontend with Vite</h1>
-      <p>Response from backend: {data.hello}</p>
+      <h1>GraphQL React App</h1>
+      <p>Response from GraphQL API: {data.hello}</p>
     </div>
   );
 }

@@ -1,17 +1,22 @@
-import { useQuery } from "@apollo/client";
-import { HELLO_QUERY } from "./queries";
+import { ApolloProvider } from "./ApolloProvider";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Signup } from "./login/Signup";
 
 function App() {
-  const { loading, error, data } = useQuery(HELLO_QUERY);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
   return (
-    <div>
-      <h1>GraphQL React App</h1>
-      <p>Response from GraphQL API: {data.hello}</p>
-    </div>
+    <ApolloProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          {/* Protected Dashboard Route */}
+          <Route element={<ProtectedRoute />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Route>
+        </Routes>
+      </Router>
+    </ApolloProvider>
   );
 }
 

@@ -7,12 +7,16 @@ import { join } from 'path';
 import { ExampleResolver } from './example/example.resolver';
 import { WelcomeController } from './welcome/welcome.controller';
 
-import { AuthService } from './auth/auth.service';
+
 import { AuthResolver } from './auth/auth.resolver';
 import { User, UserSchema } from './models/user.schema';
+import { AuthModule } from './auth/auth.module';
+import { AuthService } from './auth/auth.service';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot(), // Load .env file
     MongooseModule.forRoot('mongodb://mongo:27017/mydb'),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
@@ -22,6 +26,7 @@ import { User, UserSchema } from './models/user.schema';
       csrfPrevention: false,
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    AuthModule,
   ],
 
   providers: [AuthService, AuthResolver],

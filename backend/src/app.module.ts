@@ -6,13 +6,12 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { ExampleResolver } from './example/example.resolver';
 import { WelcomeController } from './welcome/welcome.controller';
-
-
 import { AuthResolver } from './auth/auth.resolver';
 import { User, UserSchema } from './models/user.schema';
 import { AuthModule } from './auth/auth.module';
 import { AuthService } from './auth/auth.service';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -26,6 +25,14 @@ import { ConfigModule } from '@nestjs/config';
       csrfPrevention: false,
     }),
     MongooseModule.forFeature([{ name: User.name, schema: UserSchema }]),
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: (configService: ConfigService) => ({
+        secret: configService.get<string>('JWT_SECRET'),
+        signOptions: { expiresIn: '1h' },
+      }),
+    }),
     AuthModule,
   ],
 

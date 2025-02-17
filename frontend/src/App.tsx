@@ -1,6 +1,10 @@
 import { ApolloProvider } from "./ApolloProvider";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Signup } from "./login/Signup";
+import { Home } from "./pages/Home";
+import { Login } from "./login/Login";
+import { ProtectedRoute } from "./login/ProtectedRoute";
+import { Dashboard } from "./pages/Dashboard";
 
 function App() {
   return (
